@@ -1,11 +1,12 @@
 const uuid = require('uuid')
 const users = require('../db/users.db')
+const tasks = require('../db/tasks.db')
 
-exports.getAll = (_, reply) => {
+exports.getAllUsers = (_, reply) => {
 	reply.status(200).send(users.getAll())
 }
 
-exports.getById = (request, reply) => {
+exports.getUserById = (request, reply) => {
 	const user = users.getById(request.params.userId)
 
 	if (!user) {
@@ -15,7 +16,7 @@ exports.getById = (request, reply) => {
 	reply.status(200).send(user)
 }
 
-exports.create = (request, reply) => {
+exports.createUser = (request, reply) => {
 	const data = {}
 	data.id = uuid.v4()
 	data.login = request.body.login
@@ -25,10 +26,18 @@ exports.create = (request, reply) => {
 	reply.status(201).send(users.create(data))
 }
 
-exports.deleteById = (request, reply) => {
+exports.putUser = (request, reply) => {
+	const data = request.body
 	const {userId} = request.params
+
+	reply.status(200).send(users.put(userId, data))
+}
+
+exports.deleteUserById = (request, reply) => {
+	const { userId } = request.params
 	
 	if (users.delete(userId)) {
+		tasks.deleteUserFromTask(userId)
 		reply.status(200).send({ msg: "User deleted"})
 	}
 	reply.status(404).send({ err: "User not found"})

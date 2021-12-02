@@ -9,8 +9,26 @@ exports.getById = (userId) => User.toResponse(users.filter(user => user.id === u
 exports.create = (data) => {
 	const user = new User(data)
 	users.push(user)
-	console.log(user)
+	
 	return User.toResponse(user)
+}
+
+exports.put = (userId, data) => {
+	// users = users.map(user => {
+	// 	if (user.id === userId) {
+	// 		user = data
+	// 	}
+	// 	return data
+	// })
+	for (let i = 0; i < users.length; i += 1) {
+		if (users[i].id === userId) {
+			users[i] = data
+
+			return users[i]
+		}
+	}
+
+	return { error: "User not found"}
 }
 
 exports.delete = (userId) => {
