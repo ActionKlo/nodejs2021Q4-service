@@ -1,4 +1,4 @@
-const { randomUUID } = require('crypto')
+const uuid = require('uuid')
 const users = require('../db/users.db')
 
 exports.getAll = (_, reply) => {
@@ -6,12 +6,18 @@ exports.getAll = (_, reply) => {
 }
 
 exports.getById = (request, reply) => {
-	reply.status(200).send(users.getById(request.params.userId))
+	const user = users.getById(request.params.userId)
+
+	if (!user) {
+		reply.status(404).send({ error: "User not found" })
+	}
+
+	reply.status(200).send(user)
 }
 
 exports.create = (request, reply) => {
 	const data = {}
-	data.id = randomUUID()
+	data.id = uuid.v4()
 	data.login = request.body.login
 	data.name = request.body.name
 	data.password = request.body.password
@@ -23,8 +29,7 @@ exports.deleteById = (request, reply) => {
 	const {userId} = request.params
 	
 	if (users.delete(userId)) {
-		console.log("Udaleno")
-		reply.status(200).send({ msg: "Udaleno"})
+		reply.status(200).send({ msg: "User deleted"})
 	}
 	reply.status(404).send({ err: "User not found"})
 }

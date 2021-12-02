@@ -1,17 +1,16 @@
 let users = []
+const User = require('../models/user.model')
 
-exports.getAll = () => users
 
-exports.getById = (id) => users.filter(user => user.id === id)[0]
+exports.getAll = () => users.map(user => User.toResponse(user))
+
+exports.getById = (userId) => User.toResponse(users.filter(user => user.id === userId)[0])
 
 exports.create = (data) => {
-	users.push(data)
-
-	return {
-		id: data.id,
-		login: data.login,
-		name: data.name
-	}
+	const user = new User(data)
+	users.push(user)
+	console.log(user)
+	return User.toResponse(user)
 }
 
 exports.delete = (userId) => {

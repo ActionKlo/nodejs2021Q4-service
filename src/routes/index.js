@@ -1,4 +1,5 @@
-const { getAll, getById, create, deleteById } = require('./user.router')
+const { getAll, getById, create, deleteById } = require('../controllers/user.controller')
+const { getAllBoards, createBoard } = require('../controllers/board.controller')
 
 module.exports = (app) => {
 	app.get('/users', getAll)
@@ -7,4 +8,7 @@ module.exports = (app) => {
 	app.post('/users', create)
 
 	app.delete('/users/:userId', deleteById)
+
+	app.get('/boards', getAllBoards)
+	app.post('/boards', createBoard)
 }
