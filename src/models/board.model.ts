@@ -1,29 +1,27 @@
-const uuid = require('uuid')
+import { randomUUID } from "crypto"
 
 class Board {
+	id: string
+	title: string
+	columns: { id: string; title: string; order: number }[]
 	constructor({
-		id = uuid.v4(),
+		id = randomUUID(),
 		title = "Board title",
 		columns = [{
-			id: uuid.v4(),
+			id: randomUUID(),
 			title: "Column title 1",
 			order: 1
-		}, {
-			id: uuid.v4(),
-			title: "Column title 2",
-			order: 2
 		}]
 	} = {}) {
 		this.id = id
 		this.title = title
 		this.columns = columns
-		
 	}
 
-	static toResponse(board) {
+	static toResponse(board : { id: string, title: string, columns: object[]}) {
 		const { id, title, columns } = board
 		return { id, title, columns }
 	}
 }
 
-module.exports = Board
+export = Board
