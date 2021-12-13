@@ -1,13 +1,13 @@
 // import { getAllUsers, getUserById, createUser, putUser, deleteUserById } from '../controllers/user.controller'
+import { FastifyInstance } from 'fastify'
 import { getAllBoards, getBoardById, createBoard, putBoard, deleteBoardById } from '../controllers/board.controller'
 // import { getAlltasks, getTaskById, createTask, putTask, deleteTaskById } from '../controllers/task.controller'
 
-export function router (app: { 
-	get: (arg0: string, arg1: object) => void; 
-	post: (arg0: string, arg1: object) => void; 
-	put: (arg0: string, arg1: object) => void; 
-	delete: (arg0: string, arg1: object) => void 
-}) {
+/**
+ * Function for route requests
+ * @param app - FastifyInstance
+ */
+export function router (app: FastifyInstance) {
 	// app.get('/users', getAllUsers)
 	// app.get('/users/:userId', getUserById)
 	// app.post('/users', createUser)

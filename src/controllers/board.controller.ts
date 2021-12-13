@@ -1,48 +1,42 @@
 // const uuid = require('uuid')
+import { FastifyReply, FastifyRequest } from 'fastify';
 import { getAll, getById, create, put, deleteById } from '../db/board.db';
 // import tasks from '../db/tasks.db'
 
-export function getAllBoards(
-  _: { params: object },
-  reply: { status: (arg0: number) => { send: { (arg0: object): object } } }
-): object {
-  reply.status(200);
-  return getAll();
+export function getAllBoards(_: FastifyRequest, reply: FastifyReply) {
+  reply.status(200).send(getAll());
 }
 
 export function getBoardById(
-  request: {
-    params: {
+  request: FastifyRequest<{
+    Params: {
       boardId: string;
     };
-  },
-  reply: {
-    status: (arg0: number) => { send: object };
-  }
-): object {
+  }>,
+  reply: FastifyReply
+) {
   const board: object = getById(request.params.boardId);
 
   if (JSON.stringify(board) === JSON.stringify({})) {
-    reply.status(404);
-    return { error: 'Board not found' };
+    reply.status(404).send({ error: 'Board not found' });
   }
 
-  reply.status(200);
-  return board;
+  reply.status(200).send(board);
 }
 
 export function createBoard(
-  request: { body: { title: string; columns: object[] } },
-  reply: {
-    status: (arg0: number) => {
-      send: object;
+  request: FastifyRequest<{
+    Body: {
+      title: string;
+      columns: object[];
     };
-  }
+  }>,
+  reply: FastifyReply
 ) {
   const data = request.body;
   data.title = request.body.title;
   // data.columns
-  console.log(data);
+  // console.log(data);
   // console.log(request.body)
   if (request.body.columns) {
     // for (let i : number = 0; i < request.body.columns.length; i += 1)
@@ -55,41 +49,39 @@ export function createBoard(
 
     data.columns = request.body.columns;
   }
-  reply.status(201);
-  return create(data);
+  reply.status(201).send(create(data));
 }
 
 export function putBoard(
-  request: { body: { title: string }; params: { boardId: string } },
-  reply: {
-    status: (arg0: number) => {
-      send: object;
+  request: FastifyRequest<{
+    Body: {
+      title: string;
     };
-  }
+    Params: {
+      boardId: string;
+    };
+  }>,
+  reply: FastifyReply
 ) {
   const data: { title: string } = request.body;
   const { boardId } = request.params;
 
-  reply.status(200);
-  return put(boardId, data);
+  reply.status(200).send(put(boardId, data));
 }
 
-export function deleteBoardById (request:
-	{ params: {
-			boardId: string
-		}
-	}, reply: {
-		status: (arg0: number) => {
-			send: object
-		}
-	}) : object {
-	const { boardId } = request.params
+export function deleteBoardById(
+  request: FastifyRequest<{
+    Params: {
+      boardId: string
+    }
+  }>,
+  reply: FastifyReply
+) {
+  const { boardId } = request.params;
 
-	if (deleteById(boardId)) {
-		// tasks.deleteTaskByBordId(boardId)
-		reply.status(200)
-		return { msg: "Board deleted"}
-	}
-	reply.status(404)
-	return { err: "Board not found"}
+  if (deleteById(boardId)) {
+    // tasks.deleteTaskByBordId(boardId)
+    reply.status(200).send({ msg: 'Board deleted' });
+  }
+  reply.status(404).send({ err: 'Board not found' });
 }

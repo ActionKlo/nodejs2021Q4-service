@@ -1,4 +1,4 @@
-import Board from '../models/board.model'
+import Board from '../models/board.model';
 
 // columns: { id: string; title: string; order: number }[]
 
@@ -9,61 +9,85 @@ import Board from '../models/board.model'
 // 	columns: object[]
 // }
 
-let  boards: Array<{
-	id: string,
-	title: string,
-	columns: object[]
-}> = []
+let boards: Array<{
+  id: string;
+  title: string;
+  columns: object[];
+}> = [];
 
-export function getAll() : object {
-	return boards
+/**
+ * Get all boards
+ * @returns all boards
+ */
+export function getAll(): object {
+  return boards;
 }
 
+/**
+ * Get board by id
+ * @param boardId - id board from request
+ * @returns - fined board || empty object
+ */
 export function getById(boardId: string): object {
-	// console.log("---------------------------")
-	// console.log(boardId)
-	for (let i = 0; i < boards.length; i += 1) {
-		// console.log("---------------------")
-		// console.log(Board.toResponse(boards[i]))
-		// console.log("---------------------")
+  // console.log("---------------------------")
+  // console.log(boardId)
+  for (let i = 0; i < boards.length; i += 1) {
+    // console.log("---------------------")
+    // console.log(Board.toResponse(boards[i]))
+    // console.log("---------------------")
 
-		if (Board.toResponse(boards[i]).id === boardId) {
-			return Board.toResponse(boards[i])
-		}
-	}
-	return {}
+    if (Board.toResponse(boards[i]).id === boardId) {
+      return Board.toResponse(boards[i]);
+    }
+  }
+  return {};
 }
 
-export function create(data : object) : object {
-	const b = new Board(data)
-	
-	boards.push(Board.toResponse(b))
-	
-	return Board.toResponse(b)
+/**
+ * Create board
+ * @param data - object with data to create board
+ * @returns new created board
+ */
+export function create(data: object): object {
+  const b = new Board(data);
+
+  boards.push(Board.toResponse(b));
+
+  return Board.toResponse(b);
 }
 
-export function put (boardId : string, data : { title: string }) {
-	console.log(data)
-	for (let i = 0; i < boards.length; i += 1) {
-		if (boards[i].id === boardId) {
-			// boards[i] = data
-			boards[i].title = data.title
+/**
+ * Put board by id
+ * @param boardId - id board wich need to edit
+ * @param data - object with new data
+ * @returns Edited board || error object
+ */
+export function put(boardId: string, data: { title: string }) {
+  for (let i = 0; i < boards.length; i += 1) {
+    if (boards[i].id === boardId) {
+      // boards[i] = data
+      boards[i].title = data.title;
 
-			return boards[i]
-		}
-	}
+      return boards[i];
+    }
+  }
 
-	return { error: "Board not found" }
+  return { error: 'Board not found' };
 }
 
-export function deleteById (boardId: string) {
-	let deleted = false
-	boards = boards.filter(board => {
-		if (board.id === boardId) {
-			deleted = true
-		}
-		return board.id !== boardId
-	})
-	
-	return deleted
+/**
+ * Delete board by id
+ * @param boardId id board with need to delete
+ * @returns true if deleted
+ */
+export function deleteById(boardId: string) {
+  let deleted = false;
+  boards = boards.filter((board) => {
+    if (board.id === boardId) {
+      deleted = true;
+    }
+    return board.id !== boardId;
+  });
+
+  return deleted;
 }

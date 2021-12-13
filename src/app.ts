@@ -1,7 +1,7 @@
-import fastify from "fastify";
+import fastify, { FastifyInstance } from "fastify";
 import { router } from "./routes";
 
-const app: any = fastify()
+const app: FastifyInstance = fastify()
 
 router(app)
 // import Router from "./routes";
