@@ -13,7 +13,13 @@ import {
   putBoard,
   deleteBoardById,
 } from '../controllers/board.controller';
-// import { getAlltasks, getTaskById, createTask, putTask, deleteTaskById } from '../controllers/task.controller'
+import {
+  getAlltasks,
+  getTaskById,
+  createTask,
+  putTask,
+  deleteTaskById,
+} from '../controllers/task.controller';
 
 /**
  * Function for route requests
@@ -32,9 +38,9 @@ export function router(app: FastifyInstance) {
   app.put('/boards/:boardId', putBoard);
   app.delete('/boards/:boardId', deleteBoardById);
 
-  // app.get('/boards/:boardId/tasks', getAlltasks)
-  // app.get('/boards/:boardId/tasks/:taskId', getTaskById)
-  // app.post('/boards/:boardId/tasks', createTask)
-  // app.put('/boards/:boardId/tasks/:taskId', putTask)
-  // app.delete('/boards/:boardId/tasks/:taskId', deleteTaskById)
+  app.get('/boards/:boardId/tasks', getAlltasks);
+  app.get('/boards/:boardId/tasks/:taskId', getTaskById);
+  app.post('/boards/:boardId/tasks', createTask);
+  app.put('/boards/:boardId/tasks/:taskId', putTask);
+  app.delete('/boards/:boardId/tasks/:taskId', deleteTaskById);
 }

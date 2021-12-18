@@ -34,12 +34,6 @@ export function create(data: {
 }
 
 export function put(userId: string, data: { name: string }) {
-  // users = users.map(user => {
-  // 	if (user.id === userId) {
-  // 		user = data
-  // 	}
-  // 	return data
-  // })
   for (let i = 0; i < users.length; i += 1) {
     if (users[i].id === userId) {
       users[i].name = data.name;

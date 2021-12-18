@@ -1,4 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
+import { deleteUserFromTask } from '../db/tasks.db';
 import { create, getAll, getById, put, deleteById } from '../db/users.db';
 
 export function getAllUsers(_: FastifyRequest, reply: FastifyReply) {
@@ -69,7 +70,7 @@ export function deleteUserById(
   const { userId } = request.params;
 
   if (deleteById(userId)) {
-    // tasks.deleteUserFromTask(userId);
+    deleteUserFromTask(userId);
     reply.status(200).send({ msg: 'User deleted' });
   }
   reply.status(404).send({ err: 'User not found' });
