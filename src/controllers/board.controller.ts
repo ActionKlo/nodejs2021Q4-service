@@ -2,10 +2,22 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { getAll, getById, create, put, deleteById } from '../db/board.db';
 import { deleteTaskByBordId } from '../db/tasks.db';
 
+/**
+ * Send request to DB for get all boards
+ *
+ * @param _ - FastifyRequest
+ * @param reply - FastifyReply
+ */
 export function getAllBoards(_: FastifyRequest, reply: FastifyReply) {
   reply.status(200).send(getAll());
 }
 
+/**
+ * Send request to DB for get board by Id
+ *
+ * @param request - FastifyRequest with boardId params
+ * @param reply - FastifyReply
+ */
 export function getBoardById(
   request: FastifyRequest<{
     Params: {
@@ -23,6 +35,12 @@ export function getBoardById(
   reply.status(200).send(board);
 }
 
+/**
+ * Send request to DB for create board
+ *
+ * @param request - FastifyRequest with board data
+ * @param reply - FastifyReply
+ */
 export function createBoard(
   request: FastifyRequest<{
     Body: {
@@ -40,6 +58,12 @@ export function createBoard(
   reply.status(201).send(create(data));
 }
 
+/**
+ * Send request to DB for put board by Id
+ *
+ * @param request - FastifyRequest with boardId params and board data
+ * @param reply - FastifyReply
+ */
 export function putBoard(
   request: FastifyRequest<{
     Body: {
@@ -57,6 +81,12 @@ export function putBoard(
   reply.status(200).send(put(boardId, data));
 }
 
+/**
+ * Send request to DB for delete board by Id and delete all tasks in this board
+ *
+ * @param request - FastifyRequest with boardId params
+ * @param reply - FastifyReply
+ */
 export function deleteBoardById(
   request: FastifyRequest<{
     Params: {

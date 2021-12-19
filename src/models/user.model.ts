@@ -11,6 +11,12 @@ class User implements IUser {
   name: string;
   login: string;
   password: string;
+  
+  /**
+   * Create user
+   *
+   * @param param0 - object with default data for user
+   */
   constructor({
     id = randomUUID(),
     name = 'USER',
@@ -23,7 +29,13 @@ class User implements IUser {
     this.password = password;
   }
 
-  static toResponse(user: { id: string; name: string; login: string }) {
+  /**
+   * Return user for reply
+   * 
+   * @param user - user data
+   * @returns user without password
+   */
+  static toResponse(user: { id: string; name: string; login: string }): object {
     const { id, name, login } = user;
     return { id, name, login };
   }

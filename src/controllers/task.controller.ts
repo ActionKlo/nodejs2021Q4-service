@@ -1,10 +1,22 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { getAll, create, put, getById, deleteById } from '../db/tasks.db';
 
+/**
+ * Send request to DB for get all tasks
+ *
+ * @param _ - FastifyRequest
+ * @param reply - FastifyReply
+ */
 export function getAlltasks(_: FastifyRequest, reply: FastifyReply) {
   reply.status(200).send(getAll());
 }
 
+/**
+ * Send request to DB for get task by Id
+ *
+ * @param request - FastifyRequest with taskId params
+ * @param reply - FastifyReply
+ */
 export function getTaskById(
   request: FastifyRequest<{
     Params: {
@@ -22,6 +34,12 @@ export function getTaskById(
   reply.status(200).send(task);
 }
 
+/**
+ * Send request to DB for create task
+ *
+ * @param request - FastifyRequest with task data and boardId params
+ * @param reply - FastifyReply
+ */
 export function createTask(
   request: FastifyRequest<{
     Body: {
@@ -45,6 +63,12 @@ export function createTask(
   reply.status(201).send(create(data));
 }
 
+/**
+ * Send request to DB for put task by Id
+ *
+ * @param request - FastifyRequest with taskId params and task data
+ * @param reply - FastifyReply
+ */
 export function putTask(
   request: FastifyRequest<{
     Body: {
@@ -73,7 +97,12 @@ export function putTask(
 
   reply.status(200).send(put(taskId, data));
 }
-
+/**
+ * Send request to DB for delete task by Id
+ *
+ * @param request - FastifyRequest with taskId params
+ * @param reply - FastifyReply
+ */
 export function deleteTaskById(
   request: FastifyRequest<{
     Params: {

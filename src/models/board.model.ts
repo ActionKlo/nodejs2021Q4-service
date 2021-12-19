@@ -4,6 +4,12 @@ class Board {
   id: string;
   title: string;
   columns: { id: string; title: string; order: number }[];
+
+  /**
+   * Create Board
+   *
+   * @param param0 - object with default data for board
+   */
   constructor({
     id = randomUUID(),
     title = 'Board title',
@@ -20,6 +26,18 @@ class Board {
     this.columns = columns;
   }
 
+  /**
+   * Return board from data
+   *
+   * @remarks
+   * This function will be deleted in next updates
+   * I have no time now =(
+   *
+   * @param board - board data
+   * @returns board
+   *
+   * @beta
+   */
   static toResponse(board: { id: string; title: string; columns: object[] }) {
     const { id, title, columns } = board;
     return { id, title, columns };

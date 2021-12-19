@@ -19,6 +19,11 @@ class Task implements ITask {
   boardId: string | null;
   columnId: string | null;
 
+  /**
+   * Create Task
+   *
+   * @param param0 - object with default data for task
+   */
   constructor({
     id = randomUUID(),
     title = 'Task title',

@@ -8,6 +8,7 @@ let boards: Array<{
 
 /**
  * Get all boards
+ *
  * @returns all boards
  */
 export function getAll(): object {
@@ -16,8 +17,9 @@ export function getAll(): object {
 
 /**
  * Get board by id
+ *
  * @param boardId - id board from request
- * @returns - fined board || empty object
+ * @returns fined board || empty object
  */
 export function getById(boardId: string): object {
   for (let i = 0; i < boards.length; i += 1) {
@@ -30,6 +32,7 @@ export function getById(boardId: string): object {
 
 /**
  * Create board
+ *
  * @param data - object with data to create board
  * @returns new created board
  */
@@ -43,9 +46,10 @@ export function create(data: object): object {
 
 /**
  * Put board by id
- * @param boardId - id board wich need to edit
+ *
+ * @param boardId - id board that need to edit
  * @param data - object with new data
- * @returns Edited board || error object
+ * @returns Edited board || error
  */
 export function put(boardId: string, data: { title: string }) {
   for (let i = 0; i < boards.length; i += 1) {
@@ -61,8 +65,9 @@ export function put(boardId: string, data: { title: string }) {
 
 /**
  * Delete board by id
- * @param boardId id board with need to delete
- * @returns true if deleted
+ *
+ * @param boardId - id board that need to delete
+ * @returns true if deleted || false if not found
  */
 export function deleteById(boardId: string) {
   let deleted = false;
