@@ -1,7 +1,6 @@
-// import { config } from './common/config';
 import app from './app';
+import { config } from './common/config';
 
-// ! Add PORT from config
-app.listen(4000, () => {
-  console.log(`App is running on http://localhost: 4000`);
+app.listen(config.PORT, () => {
+  console.log(`App is running on http://localhost: ${config.PORT}`);
 });
