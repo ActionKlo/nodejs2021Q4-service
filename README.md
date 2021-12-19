@@ -4,7 +4,7 @@
 
 ```
 git clone https://github.com/ActionKlo/nodejs2021Q4-service.git
-git checkout dev
+git checkout ts-task
 ```
 
 ## Installing NPM modules
