@@ -38,6 +38,7 @@ class Board {
    *
    * @beta
    */
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   static toResponse(board: { id: string; title: string; columns: object[] }) {
     const { id, title, columns } = board;
     return { id, title, columns };

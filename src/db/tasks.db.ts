@@ -15,7 +15,7 @@ let tasks: Array<{
  *
  * @returns all tasks
  */
-export function getAll() {
+export function getAll(): object {
   return tasks;
 }
 
@@ -25,7 +25,7 @@ export function getAll() {
  * @param taskId - id task from request
  * @returns fined task || empty object
  */
-export function getById(taskId: string) {
+export function getById(taskId: string): object {
   return tasks.filter((task) => task.id === taskId)[0];
 }
 
@@ -35,7 +35,7 @@ export function getById(taskId: string) {
  * @param data - object with data to create task
  * @returns new created task
  */
-export function create(data: object) {
+export function create(data: object): object {
   const b = new Task(data);
   tasks.push(b);
 
@@ -59,7 +59,7 @@ export function put(
     boardId: string | null;
     columnId: string | null;
   }
-) {
+): object {
   for (let i = 0; i < tasks.length; i += 1) {
     if (tasks[i].id === taskId) {
       tasks[i].title = data.title;
@@ -82,7 +82,7 @@ export function put(
  * @param taskId - id taks that need to delete
  * @returns true if deleted || false if not found
  */
-export function deleteById(taskId: string) {
+export function deleteById(taskId: string): boolean {
   let deleted = false;
   tasks = tasks.filter((task) => {
     if (task.id === taskId) {
@@ -99,7 +99,7 @@ export function deleteById(taskId: string) {
  *
  * @param userId - id user from request
  */
-export function deleteUserFromTask(userId: string) {
+export function deleteUserFromTask(userId: string): void {
   tasks.map((task) => {
     const item = task;
     if (task.userId === userId) {
@@ -113,6 +113,6 @@ export function deleteUserFromTask(userId: string) {
  *
  * @param boardId - id board from request
  */
-export function deleteTaskByBordId(boardId: string) {
+export function deleteTaskByBordId(boardId: string): void {
   tasks = tasks.filter((task) => task.boardId !== boardId);
 }

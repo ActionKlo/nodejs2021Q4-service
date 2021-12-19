@@ -26,7 +26,7 @@ import {
  * 
  * @param app - FastifyInstance
  */
-export function router(app: FastifyInstance) {
+export function router(app: FastifyInstance): void {
   app.get('/users', getAllUsers);
   app.get('/users/:userId', getUserById);
   app.post('/users', createUser);

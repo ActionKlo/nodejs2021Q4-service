@@ -8,7 +8,7 @@ import { deleteTaskByBordId } from '../db/tasks.db';
  * @param _ - FastifyRequest
  * @param reply - FastifyReply
  */
-export function getAllBoards(_: FastifyRequest, reply: FastifyReply) {
+export function getAllBoards(_: FastifyRequest, reply: FastifyReply): void {
   reply.status(200).send(getAll());
 }
 
@@ -25,7 +25,7 @@ export function getBoardById(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const board: object = getById(request.params.boardId);
 
   if (JSON.stringify(board) === JSON.stringify({})) {
@@ -49,7 +49,7 @@ export function createBoard(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const data = request.body;
   data.title = request.body.title;
   if (request.body.columns) {
@@ -74,7 +74,7 @@ export function putBoard(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const data: { title: string } = request.body;
   const { boardId } = request.params;
 
@@ -94,7 +94,7 @@ export function deleteBoardById(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const { boardId } = request.params;
 
   if (deleteById(boardId)) {

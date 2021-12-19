@@ -13,7 +13,7 @@ let users: Array<{
  *
  * @returns all users
  */
-export function getAll() {
+export function getAll(): object {
   return users.map((user) => User.toResponse(user));
 }
 
@@ -23,7 +23,7 @@ export function getAll() {
  * @param userId - id user from request
  * @returns fined user || empty object
  */
-export function getById(userId: string) {
+export function getById(userId: string): object {
   return User.toResponse(users.filter((user) => user.id === userId)[0]);
 }
 
@@ -37,7 +37,7 @@ export function create(data: {
   name: string;
   login: string;
   password: string;
-}) {
+}): object {
   const user = {
     id: randomUUID(),
     name: data.name,
@@ -57,7 +57,7 @@ export function create(data: {
  * @param data - object with new data
  * @returns Edited user || error
  */
-export function put(userId: string, data: { name: string }) {
+export function put(userId: string, data: { name: string }): object {
   for (let i = 0; i < users.length; i += 1) {
     if (users[i].id === userId) {
       users[i].name = data.name;
@@ -75,7 +75,7 @@ export function put(userId: string, data: { name: string }) {
  * @param userId - id user that need to delete
  * @returns true if deleted || false if not found
  */
-export function deleteById(userId: string) {
+export function deleteById(userId: string): boolean {
   let deleted = false;
   users = users.filter((user) => {
     if (user.id === userId) {

@@ -7,7 +7,7 @@ import { getAll, create, put, getById, deleteById } from '../db/tasks.db';
  * @param _ - FastifyRequest
  * @param reply - FastifyReply
  */
-export function getAlltasks(_: FastifyRequest, reply: FastifyReply) {
+export function getAlltasks(_: FastifyRequest, reply: FastifyReply): void {
   reply.status(200).send(getAll());
 }
 
@@ -24,7 +24,7 @@ export function getTaskById(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const task = getById(request.params.taskId);
 
   if (!task) {
@@ -55,7 +55,7 @@ export function createTask(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const data = request.body;
 
   data.boardId = request.params.boardId;
@@ -84,7 +84,7 @@ export function putTask(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const data: {
     title: string;
     order: number;
@@ -110,7 +110,7 @@ export function deleteTaskById(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const { taskId } = request.params;
 
   if (deleteById(taskId)) {

@@ -51,7 +51,7 @@ export function create(data: object): object {
  * @param data - object with new data
  * @returns Edited board || error
  */
-export function put(boardId: string, data: { title: string }) {
+export function put(boardId: string, data: { title: string }): object {
   for (let i = 0; i < boards.length; i += 1) {
     if (boards[i].id === boardId) {
       boards[i].title = data.title;
@@ -69,7 +69,7 @@ export function put(boardId: string, data: { title: string }) {
  * @param boardId - id board that need to delete
  * @returns true if deleted || false if not found
  */
-export function deleteById(boardId: string) {
+export function deleteById(boardId: string): boolean {
   let deleted = false;
   boards = boards.filter((board) => {
     if (board.id === boardId) {

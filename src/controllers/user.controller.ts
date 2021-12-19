@@ -8,7 +8,7 @@ import { create, getAll, getById, put, deleteById } from '../db/users.db';
  * @param _ - FastifyRequest
  * @param reply - FastifyReply
  */
-export function getAllUsers(_: FastifyRequest, reply: FastifyReply) {
+export function getAllUsers(_: FastifyRequest, reply: FastifyReply): void {
   reply.status(200).send(getAll());
 }
 
@@ -25,7 +25,7 @@ export function getUserById(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const user = getById(request.params.userId);
 
   if (!user) {
@@ -50,7 +50,7 @@ export function createUser(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const data = request.body;
 
   reply.status(201).send(create(data));
@@ -74,7 +74,7 @@ export function putUser(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const data: {
     name: string;
   } = request.body;
@@ -96,7 +96,7 @@ export function deleteUserById(
     };
   }>,
   reply: FastifyReply
-) {
+): void {
   const { userId } = request.params;
 
   if (deleteById(userId)) {
