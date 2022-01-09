@@ -9,7 +9,7 @@
   "description": "REST service starter for RS School",
   "main": "src/server.js",
   "scripts": {
-    "start": "nodemon --legacy-watch src/server.ts",
+    "start": "nodemon --legacy-watch --exitcrash src/server.ts",
     "lint": "eslint --ext .js,.ts --fix src/",
     "build": "tsc -p .",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
