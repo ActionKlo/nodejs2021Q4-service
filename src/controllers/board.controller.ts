@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { getAll, getById, create, put, deleteById } from '../db/board.db';
 import { deleteTaskByBordId } from '../db/tasks.db';
+// import { logger } from '../logs';
 
 /**
  * Send request to DB for get all boards
@@ -9,6 +10,7 @@ import { deleteTaskByBordId } from '../db/tasks.db';
  * @param reply - FastifyReply
  */
 export function getAllBoards(_: FastifyRequest, reply: FastifyReply): void {
+  // logger.info("200")
   reply.status(200).send(getAll());
 }
 
@@ -29,6 +31,7 @@ export function getBoardById(
   const board: object = getById(request.params.boardId);
 
   if (JSON.stringify(board) === JSON.stringify({})) {
+    // logger.error("Board not found")
     reply.status(404).send({ error: 'Board not found' });
   }
 
