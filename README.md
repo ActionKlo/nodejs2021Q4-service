@@ -4,39 +4,11 @@
 
 ```
 git clone https://github.com/ActionKlo/nodejs2021Q4-service.git
-git checkout ts-task
+git checkout docker
 ```
 
-## Installing NPM modules
+## Run Docker container
 
 ```
-npm install
-```
-
-## Running application
-
-```
-npm start
-```
-
-## Testing
-
-After application running open new terminal and enter:
-
-To run all tests without authorization
-
-```
-npm test
-```
-
-To run only one of all test suites (users, boards or tasks)
-
-```
-npm test <suite name>
-```
-
-### Auto-fix and format
-
-```
-npm run lint
+docker-compose up
 ```
