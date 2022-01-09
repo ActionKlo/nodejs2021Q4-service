@@ -6,7 +6,7 @@ services:
       - postgres
     image: my-http
     build: .
-    restart: on-failure
+    restart: always
     ports:
       - ${PORT}:${PORT}
     volumes:
@@ -15,7 +15,7 @@ services:
     networks:
       - custom_network
   postgres:
-    restart: on-failure
+    restart: always
     image: postgres:14-alpine
     command: "-c logging_collector=on"
     environment:
